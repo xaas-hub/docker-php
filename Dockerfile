@@ -117,7 +117,7 @@ RUN --mount=type=secret,id=github_token,required=false \
     && echo "${WP_CLI_SHA512}  /usr/local/bin/wp" | sha512sum -c - \
     && chmod +x /usr/local/bin/wp \
     && if [ -s /run/secrets/github_token ]; then \
-        COMPOSER_AUTH="{\"github-oauth\":{\"github.com\":\"$(cat /run/secrets/github_token)\"}}"; \
+        COMPOSER_AUTH="$(printf '{"github-oauth":{"github.com":"%s"}}' "$(cat /run/secrets/github_token)")"; \
         export COMPOSER_AUTH; \
     fi \
     && php -d memory_limit=512M /usr/local/bin/wp package install \
