@@ -219,12 +219,15 @@ fpm*)
 
 	# Through FastCGI, so the worker's view: APP_ENV passed through, the msmtp
 	# password not, the per-environment .user.ini in place.
+	# cgi-fcgi forwards its own environment as FastCGI parameters, and getenv()
+	# looks there first: it must run with nothing but the request variables, or
+	# the container environment of `docker exec` would answer instead of the worker.
 	docker exec -i "$cid" sh -c 'cat >/var/www/html/smoke.php' <<'PHP'
 <?php
 echo getenv('APP_ENV'), '|', var_export(getenv('MSMTP_PASSWORD'), true), '|', ini_get('user_ini.filename');
 PHP
-	response="$(docker exec "$cid" sh -c \
-		'SCRIPT_FILENAME=/var/www/html/smoke.php REQUEST_METHOD=GET cgi-fcgi -bind -connect 127.0.0.1:9000')"
+	response="$(docker exec "$cid" env -i SCRIPT_FILENAME=/var/www/html/smoke.php REQUEST_METHOD=GET \
+		/usr/bin/cgi-fcgi -bind -connect 127.0.0.1:9000)"
 	grep -q 'staging|false|.user-staging.ini' <<<"$response" || fail "FPM worker environment: ${response}"
 	pass "FPM workers see APP_ENV but not MSMTP_PASSWORD"
 
