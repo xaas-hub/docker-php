@@ -137,7 +137,10 @@ expect_failure "APP_ENV rejects path characters" -e APP_ENV=../x -- php -v
 run -e EXEC_USER=www-data -- composer --version >/dev/null || fail "composer"
 pass "composer"
 run -e EXEC_USER=www-data -- wp --version >/dev/null || fail "wp"
-run -e EXEC_USER=www-data -- wp cli has-command profile || fail "wp profile command missing"
+# `wp cli has-command` loads WordPress to resolve package commands: list the
+# installed packages instead, which needs no installation.
+run -e EXEC_USER=www-data -- wp package list --fields=name --format=csv | grep -qx wp-cli/profile-command ||
+	fail "wp profile command missing"
 pass "wp-cli with the profile command"
 
 printf '* * * * * true\n' >"${tmp}/crontab"
