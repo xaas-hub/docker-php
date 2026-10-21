@@ -38,6 +38,14 @@ msgpack, pdo_pgsql, pgsql, redis. The `-dev` images add Xdebug, loaded with
 
 ## Available tags
 
+The same images, with the same tags, are published to two registries: use
+either.
+
+| Registry        | Image                                                                                       |
+| --------------- | ------------------------------------------------------------------------------------------- |
+| Docker Hub      | [`frugan/php`](https://hub.docker.com/r/frugan/php)                                         |
+| GitHub Packages | [`ghcr.io/xaas-hub/php`](https://github.com/orgs/xaas-hub/packages/container/package/php) |
+
 ```text
 frugan/php:<php>-<variant>[-dev][-v<release>]
 ghcr.io/xaas-hub/php:<same>
