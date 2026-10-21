@@ -108,10 +108,18 @@ RUN case "${TARGETARCH}" in \
 # Packages go to WP_CLI_PACKAGES_DIR instead of root's home, so www-data finds
 # them too. wp-cli's bundled Composer needs more than the 128M of
 # php.ini-production to resolve the package.
-RUN curl -fsSLo /usr/local/bin/wp \
+# wp-cli registers the package as a GitHub VCS repository, which Composer
+# resolves through the GitHub API: unauthenticated, the IPs shared by CI
+# runners hit its rate limit. The token is optional, local builds work without.
+RUN --mount=type=secret,id=github_token,required=false \
+    curl -fsSLo /usr/local/bin/wp \
         "https://github.com/wp-cli/wp-cli/releases/download/v${WP_CLI_VERSION}/wp-cli-${WP_CLI_VERSION}.phar" \
     && echo "${WP_CLI_SHA512}  /usr/local/bin/wp" | sha512sum -c - \
     && chmod +x /usr/local/bin/wp \
+    && if [ -s /run/secrets/github_token ]; then \
+        COMPOSER_AUTH="{\"github-oauth\":{\"github.com\":\"$(cat /run/secrets/github_token)\"}}"; \
+        export COMPOSER_AUTH; \
+    fi \
     && php -d memory_limit=512M /usr/local/bin/wp package install \
         "wp-cli/profile-command:${WP_CLI_PROFILE_VERSION}" --allow-root \
     && rm -rf /root/.wp-cli /root/.composer

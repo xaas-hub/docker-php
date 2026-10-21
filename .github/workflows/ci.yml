@@ -142,6 +142,8 @@ jobs:
           build-args: |
             PHP_VARIANT=${{ matrix.variant }}
             BASE_IMAGE=${{ matrix.base }}
+          secrets: |
+            github_token=${{ secrets.GITHUB_TOKEN }}
           labels: ${{ steps.labels.outputs.list }}
           load: true
           tags: smoke:${{ matrix.variant }}
@@ -160,6 +162,8 @@ jobs:
           build-args: |
             PHP_VARIANT=${{ matrix.variant }}
             BASE_IMAGE=${{ matrix.base }}
+          secrets: |
+            github_token=${{ secrets.GITHUB_TOKEN }}
           labels: ${{ steps.labels.outputs.list }}
           load: true
           tags: smoke:${{ matrix.variant }}-dev
@@ -197,6 +201,8 @@ jobs:
           build-args: |
             PHP_VARIANT=${{ matrix.variant }}
             BASE_IMAGE=${{ matrix.base }}
+          secrets: |
+            github_token=${{ secrets.GITHUB_TOKEN }}
           labels: ${{ steps.labels.outputs.list }}
           outputs: type=image,"name=${{ env.DOCKERHUB_IMAGE }},${{ env.GHCR_IMAGE }}",push-by-digest=true,name-canonical=true,push=true
           sbom: true
@@ -213,6 +219,8 @@ jobs:
           build-args: |
             PHP_VARIANT=${{ matrix.variant }}
             BASE_IMAGE=${{ matrix.base }}
+          secrets: |
+            github_token=${{ secrets.GITHUB_TOKEN }}
           labels: ${{ steps.labels.outputs.list }}
           outputs: type=image,"name=${{ env.DOCKERHUB_IMAGE }},${{ env.GHCR_IMAGE }}",push-by-digest=true,name-canonical=true,push=true
           sbom: true
