@@ -111,13 +111,17 @@ RUN case "${TARGETARCH}" in \
 # wp-cli registers the package as a GitHub VCS repository, which Composer
 # resolves through the GitHub API: unauthenticated, the IPs shared by CI
 # runners hit its rate limit. The token is optional, local builds work without.
+# It goes in as http-basic with the x-oauth-basic password, which is how
+# Composer stores github-oauth tokens internally: the github-oauth key itself
+# is validated, and the Composer bundled in wp-cli rejects the dotted token
+# format GitHub Actions issues.
 RUN --mount=type=secret,id=github_token,required=false \
     curl -fsSLo /usr/local/bin/wp \
         "https://github.com/wp-cli/wp-cli/releases/download/v${WP_CLI_VERSION}/wp-cli-${WP_CLI_VERSION}.phar" \
     && echo "${WP_CLI_SHA512}  /usr/local/bin/wp" | sha512sum -c - \
     && chmod +x /usr/local/bin/wp \
     && if [ -s /run/secrets/github_token ]; then \
-        COMPOSER_AUTH="$(printf '{"github-oauth":{"github.com":"%s"}}' "$(cat /run/secrets/github_token)")"; \
+        COMPOSER_AUTH="$(printf '{"http-basic":{"github.com":{"username":"%s","password":"x-oauth-basic"}}}' "$(cat /run/secrets/github_token)")"; \
         export COMPOSER_AUTH; \
     fi \
     && php -d memory_limit=512M /usr/local/bin/wp package install \
