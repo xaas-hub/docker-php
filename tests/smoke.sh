@@ -213,7 +213,10 @@ fpm*)
 	wait_healthy "$cid"
 	pass "FPM healthcheck"
 
-	docker exec "$cid" php-fpm -tt 2>&1 | grep -q 'pm.max_children = 3' ||
+	# Captured first: grep -q exits on the first match, and with pipefail the
+	# SIGPIPE that hits the still-writing docker exec would fail the check.
+	fpm_config="$(docker exec "$cid" php-fpm -tt 2>&1)"
+	grep -q 'pm.max_children = 3' <<<"$fpm_config" ||
 		fail "FPM_POOL_PM__MAX_CHILDREN not applied"
 	pass "FPM_POOL_* sets pool directives"
 
