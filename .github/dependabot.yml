@@ -1,0 +1,24 @@
+version: 2
+updates:
+  # Enable version updates for GitHub Actions
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "09:00"
+    open-pull-requests-limit: 5
+    assignees:
+      - "frugan-dev"
+    commit-message:
+      prefix: "deps"
+      include: "scope"
+    labels:
+      - "dependencies"
+      - "github-actions"
+
+# No "docker" entry: the base image is chosen by ci.yml through BASE_IMAGE and
+# rebuilt whenever its digest changes, and the composer and
+# install-php-extensions stages follow floating major tags on purpose.
+# SUPERCRONIC_VERSION and WP_CLI_VERSION in the Dockerfile are ARGs, which
+# Dependabot cannot see: bump them by hand, checksums included.
