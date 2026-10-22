@@ -31,7 +31,7 @@ Extensions always enabled: bcmath, exif, gd, intl, mysqli, opcache,
 pdo_mysql, sodium, zip, plus those of the official image.
 
 Optional, enabled with `PHP_EXTENSIONS`: apcu, igbinary, imagick, memcached,
-msgpack, pdo_pgsql, pgsql, redis. The `-dev` images add Xdebug, loaded with
+msgpack, pdo_pgsql, pgsql, redis, soap. The `-dev` images add Xdebug, loaded with
 `XDEBUG_MODE=off`.
 
 `php.ini` is `php.ini-production`, with `expose_php = Off`.

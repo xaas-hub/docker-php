@@ -91,7 +91,7 @@ for module in bcmath exif gd intl mysqli pdo_mysql sodium zip "Zend OPcache"; do
 	has_module "$module" "$modules" || fail "core extension ${module} not loaded"
 done
 pass "core extensions loaded"
-for module in apcu igbinary imagick memcached msgpack pdo_pgsql pgsql redis; do
+for module in apcu igbinary imagick memcached msgpack pdo_pgsql pgsql redis soap; do
 	has_module "$module" "$modules" && fail "optional extension ${module} loaded by default"
 done
 pass "optional extensions off by default"
@@ -104,9 +104,9 @@ pass "xdebug only in the dev targets"
 
 # Mixed separators on purpose. redis and memcached must pull in their
 # serializers, or PHP warns that it cannot load them.
-modules="$(run -e "PHP_EXTENSIONS=apcu, imagick;memcached pdo_pgsql,pgsql,REDIS" -- php -m 2>&1)"
+modules="$(run -e "PHP_EXTENSIONS=apcu, imagick;memcached pdo_pgsql,pgsql,REDIS soap" -- php -m 2>&1)"
 grep -qi warning <<<"$modules" && fail "warnings while loading extensions: ${modules}"
-for module in apcu igbinary imagick memcached msgpack pdo_pgsql pgsql redis; do
+for module in apcu igbinary imagick memcached msgpack pdo_pgsql pgsql redis soap; do
 	has_module "$module" "$modules" || fail "PHP_EXTENSIONS: ${module} not loaded"
 done
 pass "PHP_EXTENSIONS enables the optional extensions and their dependencies"
