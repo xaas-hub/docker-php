@@ -62,6 +62,10 @@ PHP: `8.2`, `8.3`, `8.4`, `8.5` (the branches PHP supports). Variants:
 `fpm`, `cli`. Platforms: `linux/amd64`, `linux/arm64`. There is no `latest`:
 pick a PHP branch.
 
+PHP 5.6 and 7.1 to 8.1, which PHP no longer supports, are in
+[frugan/php-legacy](https://github.com/xaas-hub/docker-php-legacy): patched
+builds to keep legacy sites running while they move to a supported branch.
+
 The rolling tags are the ones to run: a new PHP patch release or Debian
 security update reaches them within a day, without any change on your side.
 The `-v` tags are for reproducing a build exactly, and they go stale.

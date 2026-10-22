@@ -10,7 +10,7 @@ The `-vX.Y.Z` tags are never rebuilt.
 | PHP branch | Supported          |
 |------------|--------------------|
 | 8.2 – 8.5  | :white_check_mark: |
-| 8.1 and older | :x: no fixes upstream, no images here |
+| 8.1 and older | :x: no fixes upstream, no images here: 5.6 and 7.1 – 8.1 are in [docker-php-legacy](https://github.com/xaas-hub/docker-php-legacy) |
 
 ## Reporting a Vulnerability
 
