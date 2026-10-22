@@ -5,6 +5,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.1](https://github.com/xaas-hub/docker-php/compare/v0.2.0...v0.2.1) (2026-10-22)
+
+### Documentation
+
+* **readme:** point to docker-php-legacy for end-of-life PHP branches ([6fbb112](https://github.com/xaas-hub/docker-php/commit/6fbb1125c6a629ce8ac505d8dc03cbdf50cea9db))
+
 ## [0.2.0](https://github.com/xaas-hub/docker-php/compare/v0.1.4...v0.2.0) (2026-10-22)
 
 ### Features
