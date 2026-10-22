@@ -151,6 +151,12 @@ Values may not contain double quotes or newlines. `PHP_INI_DIR` and
 directives such as `php_admin_value[...]` have no variable form: mount a
 file in `/usr/local/etc/php-fpm.d/` or `/usr/local/etc/php/conf.d/`.
 
+A `PHP_INI_*` or `FPM_POOL_*` variable set to an empty value is written too,
+as `directive = ""`: that is how a directive is cleared
+(`PHP_INI_DISABLE_FUNCTIONS=`). In a compose file, `${MEMORY_LIMIT}` left
+unset therefore clears `memory_limit` instead of keeping the default: write
+`${MEMORY_LIMIT:-128M}`.
+
 ### Environments and .user.ini
 
 | Variable  | Default      |                                                     |
