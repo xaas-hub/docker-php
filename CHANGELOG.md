@@ -5,6 +5,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.1.4](https://github.com/xaas-hub/docker-php/compare/v0.1.3...v0.1.4) (2026-10-22)
+
+### Bug Fixes
+
+* **php:** turn expose_php off by default ([0e57d62](https://github.com/xaas-hub/docker-php/commit/0e57d62101887dbc685096a899bb9d853f8092f3))
+
+### Documentation
+
+* **readme:** explain that empty PHP_INI_* and FPM_POOL_* values are written ([7b0fa9c](https://github.com/xaas-hub/docker-php/commit/7b0fa9ca243898b3c8c74eb75836d00bc621afd6))
+* **readme:** recommend a cli worker for libvips ([02c6ec6](https://github.com/xaas-hub/docker-php/commit/02c6ec6551aec40fc93a7747f7f62c3771746531))
+
 ## [0.1.3](https://github.com/xaas-hub/docker-php/compare/v0.1.2...v0.1.3) (2026-10-21)
 
 ### Bug Fixes
