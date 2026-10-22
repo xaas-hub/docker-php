@@ -129,6 +129,29 @@ FROM frugan/php:8.4-fpm
 RUN install-php-extensions mongodb
 ```
 
+#### libvips
+
+libvips is not in the image, and is better kept away from FPM.
+[intervention/image-driver-vips](https://github.com/Intervention/image-driver-vips)
+reaches it through [php-vips](https://github.com/libvips/php-vips), which
+calls libvips over FFI. By default PHP allows FFI only in the CLI and in
+preloaded code (`ffi.enable=preload`): allowing it in FPM (`ffi.enable=true`)
+would let any PHP code of the site call C functions, past `disable_functions`
+and `open_basedir`.
+
+For most sites `PHP_EXTENSIONS=imagick` and the Imagick driver of Intervention
+Image are enough. When libvips pays off (large images, high volumes), process
+the images in queued jobs, Laravel queues for instance, run by a worker built
+from the cli image, where FFI works with the default settings, and leave FPM
+as it is:
+
+```dockerfile
+FROM frugan/php:8.4-cli
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends libvips42t64 \
+    && rm -rf /var/lib/apt/lists/*
+```
+
 ### php.ini and FPM pool
 
 | Variable          |                                                               |
