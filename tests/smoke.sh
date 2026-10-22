@@ -123,6 +123,8 @@ expect "PHP_INI_* sets directives" "321M 1" \
 expect_failure "PHP_INI_* rejects double quotes" -e 'PHP_INI_MEMORY_LIMIT=1"x' -- php -v
 expect "sendmail_path points to msmtp" "/usr/bin/msmtp -t" \
 	"$(run -- php -r 'echo ini_get("sendmail_path");')"
+expect "expose_php is off" "bool(false)" \
+	"$(run -- php -r 'var_dump((bool) ini_get("expose_php"));' | tr -d '\n')"
 
 user_ini='echo ini_get("user_ini.filename"), "|", ini_get("user_ini.cache_ttl");'
 expect "production keeps .user.ini" ".user.ini|300" "$(run -- php -r "$user_ini")"

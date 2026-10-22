@@ -34,7 +34,7 @@ Optional, enabled with `PHP_EXTENSIONS`: apcu, igbinary, imagick, memcached,
 msgpack, pdo_pgsql, pgsql, redis. The `-dev` images add Xdebug, loaded with
 `XDEBUG_MODE=off`.
 
-`php.ini` is `php.ini-production`.
+`php.ini` is `php.ini-production`, with `expose_php = Off`.
 
 ## Available tags
 
