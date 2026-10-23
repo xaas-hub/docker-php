@@ -125,6 +125,8 @@ expect "sendmail_path points to msmtp" "/usr/bin/msmtp -t" \
 	"$(run -- php -r 'echo ini_get("sendmail_path");')"
 expect "expose_php is off" "bool(false)" \
 	"$(run -- php -r 'var_dump((bool) ini_get("expose_php"));' | tr -d '\n')"
+expect "session upload progress is off" "bool(false)" \
+	"$(run -- php -r 'var_dump((bool) ini_get("session.upload_progress.enabled"));' | tr -d '\n')"
 
 user_ini='echo ini_get("user_ini.filename"), "|", ini_get("user_ini.cache_ttl");'
 expect "production keeps .user.ini" ".user.ini|300" "$(run -- php -r "$user_ini")"

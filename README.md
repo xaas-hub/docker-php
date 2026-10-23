@@ -35,7 +35,10 @@ igbinary, imagick, ldap, memcached, msgpack, pcntl, pdo_pgsql, pgsql, redis,
 soap, sockets, tidy, xsl. The `-dev` images add Xdebug, loaded with
 `XDEBUG_MODE=off`.
 
-`php.ini` is `php.ini-production`, with `expose_php = Off`.
+`php.ini` is `php.ini-production`, with `expose_php = Off` and
+`session.upload_progress.enabled = Off` (a mitigation PHP recommends for
+CVE-2026-115560 and CVE-2026-109619; `PHP_INI_SESSION__UPLOAD_PROGRESS__ENABLED=1`
+turns it back on).
 
 ## Available tags
 
