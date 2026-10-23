@@ -30,8 +30,9 @@ within hours, and a daily job here rebuilds as soon as their digest moves.
 Extensions always enabled: bcmath, exif, gd, intl, mysqli, opcache,
 pdo_mysql, sodium, zip, plus those of the official image.
 
-Optional, enabled with `PHP_EXTENSIONS`: apcu, igbinary, imagick, memcached,
-msgpack, pdo_pgsql, pgsql, redis, soap. The `-dev` images add Xdebug, loaded with
+Optional, enabled with `PHP_EXTENSIONS`: apcu, bz2, calendar, ftp, gettext, gmp,
+igbinary, imagick, ldap, memcached, msgpack, pcntl, pdo_pgsql, pgsql, redis,
+soap, sockets, tidy, xsl. The `-dev` images add Xdebug, loaded with
 `XDEBUG_MODE=off`.
 
 `php.ini` is `php.ini-production`, with `expose_php = Off`.
