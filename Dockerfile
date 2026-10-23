@@ -29,7 +29,7 @@ ARG TARGETARCH
 # Enabled in every container.
 ARG PHP_EXTENSIONS_CORE="bcmath exif gd intl mysqli opcache pdo_mysql zip"
 # Compiled in, enabled through PHP_EXTENSIONS at container start.
-ARG PHP_EXTENSIONS_OPTIONAL="apcu bz2 calendar ftp gettext gmp igbinary imagick ldap memcached msgpack pcntl pdo_pgsql pgsql redis soap sockets tidy xsl"
+ARG PHP_EXTENSIONS_OPTIONAL="apcu bz2 calendar ftp gettext gmp igbinary imagick ldap maxminddb memcached msgpack pcntl pdo_pgsql pgsql redis soap sockets tidy xsl"
 
 # https://github.com/aptible/supercronic/releases
 ARG SUPERCRONIC_VERSION=0.2.51
