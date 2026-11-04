@@ -5,6 +5,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.6.0](https://github.com/xaas-hub/docker-php/compare/v0.5.0...v0.6.0) (2026-11-04)
+
+### Features
+
+* add subversion for Composer packages with no dist ([078bd08](https://github.com/xaas-hub/docker-php/commit/078bd082c2d72e4ded687f8fc565e4b56cdf8c3d))
+
+### Documentation
+
+* mount the crontab directory for Supercronic ([3b6829d](https://github.com/xaas-hub/docker-php/commit/3b6829d8d673f02f065fffd0705a6ea797319f29))
+
 ## [0.5.0](https://github.com/xaas-hub/docker-php/compare/v0.4.0...v0.5.0) (2026-10-30)
 
 ### Features
